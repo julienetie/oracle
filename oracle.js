@@ -28,9 +28,12 @@ window.onresize = function() {
 
 
 
-function oracle(mediaQuery, trigger, trigger){
+function oracle(mediaQuery, truthyTrigger, falsyTrigger){
 // Check if mediaQuery is a string or object
- 
+    if(typeof mediaQuery === 'string' && ){
+
+    }
+
 // If media query is a string, trigger should exist as a string or function 
 // 
 // If trigger is a string, create event to be fired, the event will be postfixed with -true or -false
