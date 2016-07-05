@@ -13,20 +13,23 @@
         [{
             media: '@media only screen and (max-width: 40em)',
             truthy: 'truthy-custom-event-0',
-            falsy: 'falsy-custom-event-0'
-        }, {
-            media: '@media only screen and (min-width: 40.063em) and (max-width: 64em)',
-            truthy: 'truthy-custom-event-1',
-            falsy: 'falsy-custom-event-1'
-        }, {
-            media: '@media only screen and (min-width: 64.063em) and (max-width: 90em)',
-            truthy: 'truthy-custom-event-2',
-            falsy: 'falsy-custom-event-2'
-        }, {
-            media: '@media only screen and (min-width: 90.063em) and (max-width: 120em)',
-            truthy: 'truthy-custom-event-3',
-            falsy: 'falsy-custom-event-3'
-        }]
+            falsy: function(){console.log('FALSYYYYYYYYY');}
+        }
+        // , 
+        // {
+        //     media: '@media only screen and (min-width: 40.063em) and (max-width: 64em)',
+        //     truthy: 'truthy-custom-event-1',
+        //     falsy: 'falsy-custom-event-1'
+        // }, {
+        //     media: '@media only screen and (min-width: 64.063em) and (max-width: 90em)',
+        //     truthy: 'truthy-custom-event-2',
+        //     falsy: 'falsy-custom-event-2'
+        // }, {
+        //     media: '@media only screen and (min-width: 90.063em) and (max-width: 120em)',
+        //     truthy: 'truthy-custom-event-3',
+        //     falsy: 'falsy-custom-event-3'
+        // }
+        ]
     );
     </script>
 </body>
