@@ -1,3 +1,4 @@
+
 // var fortune = document.createElement('div');
 // fortune.id = 'fortune';
 // fortune.style.position = 'absolute';
@@ -25,38 +26,73 @@
 //         console.log('Media query false');
 //     }
 // }
+var is = {};
 
-function isStringOrFunction(value) {
-    return typeof value === 'string' || value === 'function';
-}
-
-function oracle(mediaQuery, truthyTrigger, falsyTrigger) {
-    var result;
-
-    // Check if mediaQuery is a string or object
-    if (typeof mediaQuery === 'string' && isStringOrFunction(truthyTrigger)) {console.log('truthy')
-        var singleOptions = {
-            media: mediaQuery,
-            truthyTrigger: truthyTrigger
-        }
-
-        if (isStringOrFunction(falsyTrigger)) { console.log('falsy')
-            singleOptions.falsyTrigger = falsyTrigger;
-        }
-
-        result = [singleOptions];
-
-    } else if (mediaQuery.constructor === Array && mediaQuery[0].constructor === {}.constructor) {console.log('multiple')
-        result = mediaQuery;
+    is.stringOrFunction = function(value){
+        return typeof value === 'string' || value === 'function';
     }
 
-    console.log('result', result)
-        // If media query is a string, trigger should exist as a string or function 
-        // 
-        // If trigger is a string, create event to be fired, the event will be postfixed with -true or -false
+    is.arrayContainingObject = function(value){
+        return value.constructor === Array && value[0].constructor === {}.constructor;
+    }
 
-    // If trigger is a function, the function will be called as a callback if true, the second trigger function is 
-    // called if false.
-    // 
-    // return result;
+
+function createMediaQueryDetector(body, head, mediaQuery, style) {
+    // Create fortune element and append to the body
+    var fortune = document.createElement('div');
+
+    fortune.style.position = 'absolute';
+    fortune.style.zIndex = -1000;
+    body.appendChild(fortune);
+
+    style.innerHTML += ''
+    console.log('createMediaQueryDetector')
+}
+
+function setupMediaQueriesCheck(body, head, mediaQueries, style) {
+    mediaQueries.forEach(function(mediaQuery) {
+        createMediaQueryDetector(body, head, mediaQuery, style);
+    });
+}
+
+
+// function isStringOrFunction(value) {
+//     return typeof value === 'string' || value === 'function';
+// }
+
+
+// function isArrayContainingObject(value) {
+//     return value.constructor === Array && value[0].constructor === {}.constructor;
+// }
+
+
+function oracle(mediaQuery, truthy, falsy) {
+    var body = document.body;
+    var head = document.getElementsByTagName('head')[0];
+    var mediaQueries;
+
+    // Create style element and append to the head
+    var style = document.createElement('style');
+
+    head.appendChild(style);
+
+    if (typeof mediaQuery === 'string' && isStringOrFunction(truthy)) {
+        var singleOptions = {
+            media: mediaQuery,
+            truthy: truthy
+        }
+
+        if (is.stringOrFunction(falsy)) {
+            singleOptions.falsy = falsy;
+        }
+
+        mediaQueries = [singleOptions];
+
+    }
+
+    if (is.arrayContainingObject(mediaQuery)) {
+        mediaQueries = mediaQuery;
+    }
+
+    setupMediaQueriesCheck(body, head, mediaQueries, style);
 }
