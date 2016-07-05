@@ -26,7 +26,10 @@
 //     }
 // }
 var is = {};
-var exit = true;
+var fortune;
+var statement;
+var fortunes = [];
+
 is.stringOrFunction = function(value) {
     return typeof value === 'string' || value === 'function';
 }
@@ -35,32 +38,36 @@ is.arrayContainingObject = function(value) {
     return value.constructor === Array && value[0].constructor === {}.constructor;
 }
 
-// function detectChanges() {
-//     window.onresize = function() {
-//         var fortuneWidth = window.getComputedStyle(fortune, null).getPropertyValue('width');
-//         if (fortuneWidth === i + 'px') {
-//             console.log('Media query true');
-//         } else {
-//             console.log('Media query false');
-//         }
-//     }
-// }
+is.fortuneTruthy = function(value, i){
+    return window.getComputedStyle(value, null).getPropertyValue('width') === (i + 1) + 'px';
+}
+
+function detectChanges(fortunes) {
+    window.onresize = function() {
+        fortunes.forEach(function(fortune, i) {
+            if (is.fortuneTruthy(fortune, i)) {
+                console.log(i, 'true');
+            } else {
+                console.log(i, 'false');
+            }
+        })
+    }
+}
 
 function createMediaQueryDetector(body, head, i, mediaQuery, mediaQueries, style) {
     // Create fortune element and append to the body
-    var fortune = document.createElement('div');
-    var width = i + 1;
-    var statement = '{\n' + '#⌘' + i + '{width:' + width + 'px;}' + '\n}';
+    fortune = document.createElement('div');
+    statement = '{\n' + '#⌘' + i + '{width:' + (i + 1) + 'px;}' + '\n}';
 
     fortune.style.position = 'absolute';
     fortune.id = '⌘' + i;
     fortune.style.zIndex = -1000;
     body.appendChild(fortune);
     style.innerHTML += '\n' + mediaQuery.media + statement;
+    fortunes.push(fortune);
 
-    if(exit){
-        detectChanges();
-        exit = false;
+    if (i === mediaQueries.length - 1) {
+        detectChanges(fortunes);
     }
 }
 
