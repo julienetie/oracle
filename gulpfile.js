@@ -19,7 +19,7 @@ var tasks = [
  */
 var src = [
     './src/amd-wrapper-start.js',
-    './src/oracle.js',
+    './src/oracle.src.js',
     './src/amd-wrapper-end.js'
 ];
 
