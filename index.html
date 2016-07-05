@@ -1,10 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Oracle - JavaScript Media Queries</title>
 </head>
+
 <body>
-<script src="oracle.js"></script>
+    <script src="oracle.js"></script>
+    <script>
+    oracle([{
+        media: '@media screen and (min-width: 35.5em)',
+        truthy: 'truthy-custom-event-0',
+        falsy: 'falsy-custom-event-0'
+    }, {
+        media: '@media screen and (min-width: 48em)',
+        truthy: 'truthy-custom-event-1',
+        falsy: 'falsy-custom-event-1'
+    }, {
+        media: '@media screen and (min-width: 64em)',
+        truthy: 'truthy-custom-event-2',
+        falsy: 'falsy-custom-event-2'
+    }, {
+        media: '@media screen and (min-width: 80em)',
+        truthy: 'truthy-custom-event-3',
+        falsy: 'falsy-custom-event-3'
+    }]);
+    </script>
 </body>
+
 </html>

@@ -45,25 +45,16 @@ function createMediaQueryDetector(body, head, mediaQuery, style) {
     fortune.style.zIndex = -1000;
     body.appendChild(fortune);
 
-    style.innerHTML += ''
-    console.log('createMediaQueryDetector')
+    style.innerHTML += '\n' + mediaQuery.media;
+
 }
+
 
 function setupMediaQueriesCheck(body, head, mediaQueries, style) {
     mediaQueries.forEach(function(mediaQuery) {
         createMediaQueryDetector(body, head, mediaQuery, style);
     });
 }
-
-
-// function isStringOrFunction(value) {
-//     return typeof value === 'string' || value === 'function';
-// }
-
-
-// function isArrayContainingObject(value) {
-//     return value.constructor === Array && value[0].constructor === {}.constructor;
-// }
 
 
 function oracle(mediaQuery, truthy, falsy) {
