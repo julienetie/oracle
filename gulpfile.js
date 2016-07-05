@@ -13,6 +13,14 @@ var tasks = [
     'Build ./oracle.min.js'
 ];
 
+/**
+ * Files to watch
+ */
+var watch = [
+    './src/**.js',
+    './**.html',
+];
+
 
 /**
  * src files in order.
@@ -51,4 +59,4 @@ gulp.task('Build ./oracle.js', function() {
  * Builds once and watch for changes.
  */
 gulp.task('default', tasks)
-    .watch('./src/**.js', tasks);
+    .watch(watch, tasks);

@@ -1,1 +1,0 @@
-!function(e){e.hello="world","object"==typeof module&&"object"==typeof module.exports?module.exports=exports=requestFrame:"function"==typeof define&&define.amd?define(function(){return requestFrame}):"object"==typeof e&&(e.requestFrame=requestFrame)}("undefined"==typeof window?{}:window);
