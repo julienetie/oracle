@@ -61,6 +61,35 @@
 
     oracle(
         [{
+            media: '@media only screen and (max-width: 640px)',
+            truthy: 'truthy-0',
+            falsy: 'falsy-0'
+        }, {
+            media: '@media only screen and (min-width: 641px) and (max-width: 1024px)',
+            truthy: 'truthy-1',
+            falsy: 'falsy-1'
+        }, {
+            media: '@media only screen and (min-width: 1025px) and (max-width: 1440px)',
+            truthy: 'truthy-2',
+            falsy: 'falsy-2'
+        }, {
+            media: '@media only screen and (min-width: 1441px) and (max-width: 1920px)',
+            truthy: 'truthy-3',
+            falsy: 'falsy-3'
+        }, {
+            media: '@media only screen and (min-width: 1921px)',
+            truthy: 'truthy-4',
+            falsy: 'falsy-4'
+        }]
+    );
+    </script>
+</body>
+
+</html>
+
+<!--
+    oracle(
+        [{
             media: '@media only screen and (max-width: 40em)',
             truthy: 'truthy-0',
             falsy: 'falsy-0'
@@ -82,7 +111,4 @@
             falsy: 'falsy-4'
         }]
     );
-    </script>
-</body>
-
-</html>
+-->
