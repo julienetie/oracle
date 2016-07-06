@@ -217,7 +217,7 @@ function triggerEventOrCallback(trigger) {
 
 
 function detectChanges(fortunes, mediaQueries) {
-    resizilla(function() {
+var trig = function() {
         fortunes.forEach(function(fortune, i) {
             if (is.fortuneTruthy(fortune, i)) {
                 if (mediaQueries[i].hasOwnProperty('truthy')) {
@@ -229,7 +229,10 @@ function detectChanges(fortunes, mediaQueries) {
                 }
             }
         })
-    }, 200, true);
+    } 
+
+    trig();
+    resizilla(trig, 200, true);
 }
 
 function createMediaQueryDetector(body, head, i, mediaQuery, mediaQueries, style) {
