@@ -10,29 +10,65 @@
     body {
         margin: 0;
         padding: 0;
-        background-color: #222;
+        background-color: #33344F;
     }
     
-    div {
+    h1 {
+        color: #F57E76;
         width: 100%;
+        text-align: center;
+    }
+    
+    h3 {
+        color: #76F5B5;
+        width: 100%;
+        text-align: center;
+        font-family: Sans-Serif;
+    }
+    
+    section{
+        width: 100%;
+    }
+    div {
+        font-family: Sans-Serif;
+        width: 100vw;
         position: relative;
         float: left;
+        border-radius: 16px;
+        margin: 0.2em 0;
+        padding: 0.2em 0 0.2em 0.5em;
+        -webkit-transition: background-color 0.5s;
+        -moz-transition: background-color 0.5s;
+        -o-transition: background-color 0.5s;
+        transition: background-color 0.5s;
     }
     
     div span {
+        border-radius: 8px;
+        background-color: #90D4AC;
         position: relative;
         float: left;
         clear: both;
+        padding: 0.2em 0.5em;
+        margin: 0.2em 0.5em;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
     }
     </style>
 </head>
 
 <body>
-    <div><span>@media only screen and (max-width: 40em) </span><span> </span></div>
-    <div><span>@media only screen and (min-width: 40.063em) and (max-width: 64em) </span><span>_</span></div>
-    <div><span>@media only screen and (min-width: 64.063em) and (max-width: 90em) </span><span>_</span></div>
-    <div><span>@media only screen and (min-width: 90.063em) and (max-width: 120em) </span><span>_</span></div>
-    <div><span>@media only screen and (min-width: 120.063em) </span><span>_</span></div>
+    <h1>Oracle</h1>
+    <h3>Resize the window</h3>
+    <section>
+        <div><span>@media only screen and (max-width: 40em) </span><span> </span></div>
+        <div><span>@media only screen and (min-width: 40.063em) and (max-width: 64em) </span><span>_</span></div>
+        <div><span>@media only screen and (min-width: 64.063em) and (max-width: 90em) </span><span>_</span></div>
+        <div><span>@media only screen and (min-width: 90.063em) and (max-width: 120em) </span><span>_</span></div>
+        <div><span>@media only screen and (min-width: 120.063em) </span><span>_</span></div>
+    </section>
     <script src="../oracle.js"></script>
     <script>
     var colors = ['#FF795E', '#FF945E', '#FFAF5E', '#FFC95E', '#FFFF5E'];
