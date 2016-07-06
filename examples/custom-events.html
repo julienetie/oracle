@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Oracle - JavaScript Media Queries</title>
+    <style>
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #222;
+    }
+    
+    div {
+        width: 100%;
+        position: relative;
+        float: left;
+    }
+    
+    div span {
+        position: relative;
+        float: left;
+        clear: both;
+    }
+    </style>
+</head>
+
+<body>
+    <div><span>@media only screen and (max-width: 40em) </span><span> </span></div>
+    <div><span>@media only screen and (min-width: 40.063em) and (max-width: 64em) </span><span>_</span></div>
+    <div><span>@media only screen and (min-width: 64.063em) and (max-width: 90em) </span><span>_</span></div>
+    <div><span>@media only screen and (min-width: 90.063em) and (max-width: 120em) </span><span>_</span></div>
+    <div><span>@media only screen and (min-width: 120.063em) </span><span>_</span></div>
+    <script src="../oracle.js"></script>
+    <script>
+    var colors = ['#FF795E', '#FF945E', '#FFAF5E', '#FFC95E', '#FFFF5E'];
+
+    var divs = [].slice.call(document.getElementsByTagName('div'));
+
+    function updateTruthy(e, div, i) {
+        div.children[1].innerHTML = 'TRUTHY';
+        div.children[1].style.backgroundColor = 'yellowgreen';
+    }
+
+    function updateFalsy(e, div, i) {
+        div.children[1].innerHTML = 'FALSY';
+        div.children[1].style.backgroundColor = 'red';
+    }
+
+    divs.forEach(function(div, i) {
+        div.style.backgroundColor = colors[i];
+        document.addEventListener('truthy-' + i, function(e) {
+            updateTruthy(e, div, i);
+        }, true);
+        document.addEventListener('falsy-' + i, function(e) {
+            updateFalsy(e, div, i);
+        }, true);
+    })
+
+
+    oracle(
+        [{
+            media: '@media only screen and (max-width: 40em)',
+            truthy: 'truthy-0',
+            falsy: 'falsy-0'
+        }, {
+            media: '@media only screen and (min-width: 40.063em) and (max-width: 64em)',
+            truthy: 'truthy-1',
+            falsy: 'falsy-1'
+        }, {
+            media: '@media only screen and (min-width: 64.063em) and (max-width: 90em)',
+            truthy: 'truthy-2',
+            falsy: 'falsy-2'
+        }, {
+            media: '@media only screen and (min-width: 90.063em) and (max-width: 120em)',
+            truthy: 'truthy-3',
+            falsy: 'falsy-3'
+        }, {
+            media: '@media only screen and (min-width: 120.063em)',
+            truthy: 'truthy-4',
+            falsy: 'falsy-4'
+        }]
+    );
+    </script>
+</body>
+
+</html>
