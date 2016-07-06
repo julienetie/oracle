@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Oracle - JavaScript Media Queries: Custom event example</title>
+    <title>Oracle - JavaScript Media Queries: Callback example</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
     html,
@@ -18,14 +18,7 @@
         width: 100%;
         text-align: center;
     }
-
-    h3 {
-        color: #76F5B5;
-        width: 100%;
-        text-align: center;
-        font-family: Sans-Serif;
-    }
-
+    
     h5 {
         color: #C563F2;
         width: 100%;
@@ -34,10 +27,18 @@
         padding: 0;
         margin: 0;
     }
-
-    section{
+    
+    h3 {
+        color: #76F5B5;
+        width: 100%;
+        text-align: center;
+        font-family: Sans-Serif;
+    }
+    
+    section {
         width: 100%;
     }
+    
     div {
         font-family: Sans-Serif;
         width: 100vw;
@@ -70,7 +71,7 @@
 
 <body>
     <h1>Oracle</h1>
-    <h5>CUSTOM EVENTS</h5>
+    <h5>CALLBACKS</h5>
     <h3>Resize the window</h3>
     <section>
         <div><span>@media only screen and (max-width: 40em) </span><span> </span></div>
@@ -82,79 +83,70 @@
     <script src="../oracle.js"></script>
     <script>
     var colors = ['#FF795E', '#FF945E', '#FFAF5E', '#FFC95E', '#FFFF5E'];
-
     var divs = [].slice.call(document.getElementsByTagName('div'));
 
-    function updateTruthy(e, div, i) {
+
+    function updateTruthy(div) {
         div.children[1].innerHTML = 'TRUTHY';
         div.children[1].style.backgroundColor = 'yellowgreen';
     }
 
-    function updateFalsy(e, div, i) {
+
+    function updateFalsy(div) {
         div.children[1].innerHTML = 'FALSY';
         div.children[1].style.backgroundColor = 'red';
     }
 
+
     divs.forEach(function(div, i) {
         div.style.backgroundColor = colors[i];
-        document.addEventListener('truthy-' + i, function(e) {
-            updateTruthy(e, div, i);
-        }, true);
-        document.addEventListener('falsy-' + i, function(e) {
-            updateFalsy(e, div, i);
-        }, true);
     })
 
 
     oracle(
         [{
             media: '@media only screen and (max-width: 640px)',
-            truthy: 'truthy-0',
-            falsy: 'falsy-0'
+            truthy: function() {
+                updateTruthy(divs[0]);
+            },
+            falsy: function() {
+                updateFalsy(divs[0]);
+            },
         }, {
             media: '@media only screen and (min-width: 641px) and (max-width: 1024px)',
-            truthy: 'truthy-1',
-            falsy: 'falsy-1'
+            truthy: function() {
+                updateTruthy(divs[1]);
+            },
+            falsy: function() {
+                updateFalsy(divs[1]);
+            },
         }, {
             media: '@media only screen and (min-width: 1025px) and (max-width: 1440px)',
-            truthy: 'truthy-2',
-            falsy: 'falsy-2'
+            truthy: function() {
+                updateTruthy(divs[2]);
+            },
+            falsy: function() {
+                updateFalsy(divs[2]);
+            },
         }, {
             media: '@media only screen and (min-width: 1441px) and (max-width: 1920px)',
-            truthy: 'truthy-3',
-            falsy: 'falsy-3'
+            truthy: function() {
+                updateTruthy(divs[3]);
+            },
+            falsy: function() {
+                updateFalsy(divs[3]);
+            },
         }, {
             media: '@media only screen and (min-width: 1921px)',
-            truthy: 'truthy-4',
-            falsy: 'falsy-4'
+            truthy: function() {
+                updateTruthy(divs[4]);
+            },
+            falsy: function() {
+                updateFalsy(divs[4]);
+            },
         }]
     );
     </script>
 </body>
 
 </html>
-<!--
-    oracle(
-        [{
-            media: '@media only screen and (max-width: 40em)',
-            truthy: 'truthy-0',
-            falsy: 'falsy-0'
-        }, {
-            media: '@media only screen and (min-width: 40.063em) and (max-width: 64em)',
-            truthy: 'truthy-1',
-            falsy: 'falsy-1'
-        }, {
-            media: '@media only screen and (min-width: 64.063em) and (max-width: 90em)',
-            truthy: 'truthy-2',
-            falsy: 'falsy-2'
-        }, {
-            media: '@media only screen and (min-width: 90.063em) and (max-width: 120em)',
-            truthy: 'truthy-3',
-            falsy: 'falsy-3'
-        }, {
-            media: '@media only screen and (min-width: 120.063em)',
-            truthy: 'truthy-4',
-            falsy: 'falsy-4'
-        }]
-    );
--->
