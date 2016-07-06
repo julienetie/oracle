@@ -203,7 +203,6 @@ is.fortuneTruthy = function(value, i) {
 
 function triggerEventOrCallback(trigger) {
     if (is.string(trigger)) {
-        console.log('custom event ' + trigger);
         // Needs to migrate for optimization
         var event = new CustomEvent(trigger, {});
             document.dispatchEvent(event);
@@ -226,7 +225,7 @@ function detectChanges(fortunes, mediaQueries) {
                 }
             }
         })
-    }, 250, true);
+    }, 200, true);
 }
 
 function createMediaQueryDetector(body, head, i, mediaQuery, mediaQueries, style) {
