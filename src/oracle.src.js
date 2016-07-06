@@ -7,21 +7,26 @@ var fortune;
 var statement;
 var fortunes = [];
 
+
 is.string = function(value) {
     return typeof value === 'string';
 }
+
 
 is.stringOrFunction = function(value) {
     return typeof value === 'string' || value === 'function';
 }
 
-is.arrayContainingObject = function(value) {
+
+is.anArrayContainingObject = function(value) {
     return value.constructor === Array && value[0].constructor === {}.constructor;
 }
+
 
 is.fortuneTruthy = function(value, i) {
     return window.getComputedStyle(value, null).getPropertyValue('width') === (i + 1) + 'px';
 }
+
 
 is.indexOf = function(str, substr) {
     return str.indexOf(substr) >= 0;
@@ -39,7 +44,7 @@ function triggerEventOrCallback(trigger) {
 }
 
 
-function detectChanges(fortunes, mediaQueries) {
+function detectChanges(config, fortunes, mediaQueries) {
     var trig = function() {
         fortunes.forEach(function(fortune, i) {
             if (is.fortuneTruthy(fortune, i)) {
@@ -53,13 +58,13 @@ function detectChanges(fortunes, mediaQueries) {
             }
         })
     }
-
+    var incept = config.incept === undefined ? true : config.incept;
     trig();
-    resizilla(trig, 200, true);
+    resizilla(trig, (config.debounce || 200), incept);
 }
 
 
-function createMediaQueryDetector(body, head, i, mediaQuery, mediaQueries, style) {
+function createMediaQueryDetector(body, config, head, i, mediaQueries, mediaQuery, style) {
     // Create fortune element and append to the body
     fortune = document.createElement('div');
     statement = '{\n' + '#⌘' + i + '{width:' + (i + 1) + 'px;}' + '\n}';
@@ -91,29 +96,29 @@ function createMediaQueryDetector(body, head, i, mediaQuery, mediaQueries, style
     fortunes.push(fortune);
 
     if (i === mediaQueries.length - 1) {
-        detectChanges(fortunes, mediaQueries);
+        detectChanges(config, fortunes, mediaQueries);
     }
 }
 
 
-function setupMediaQueriesCheck(body, head, mediaQueries, style) {
+function setupMediaQueriesCheck(body, config, head, mediaQueries, style) {
     mediaQueries.forEach(function(mediaQuery, i, mediaQueries) {
-        createMediaQueryDetector(body, head, i, mediaQuery, mediaQueries, style);
+        createMediaQueryDetector(body, config, head, i, mediaQueries, mediaQuery, style);
     });
 }
 
 
-function oracle(mediaQuery, truthy, falsy) {
+function oracle(mediaQuery, truthy, falsy, config) {
     var body = document.body;
     var head = document.getElementsByTagName('head')[0];
     var mediaQueries;
-
+    var options;
     // Create style element and append to the head
     var style = document.createElementNS(document.documentElement.namespaceURI, "style");
 
     head.appendChild(style);
 
-    if (typeof mediaQuery === 'string' && isStringOrFunction(truthy)) {
+    if (typeof mediaQuery === 'string' && is.stringOrFunction(truthy)) {
         var singleOptions = {
             media: mediaQuery,
             truthy: truthy
@@ -121,13 +126,27 @@ function oracle(mediaQuery, truthy, falsy) {
 
         if (is.stringOrFunction(falsy)) {
             singleOptions.falsy = falsy;
+            // config === config
+            options = config;
+        }else{
+             // falsy === config
+             options = falsy;
         }
 
         mediaQueries = [singleOptions];
     }
 
-    if (is.arrayContainingObject(mediaQuery)) {
+    if (is.anArrayContainingObject(mediaQuery)) {
         mediaQueries = mediaQuery;
+        // truthy === config
+        options = truthy;
     }
-    setupMediaQueriesCheck(body, head, mediaQueries, style);
+
+    if(options){
+
+    }else{
+        options = {};
+    }
+
+    setupMediaQueriesCheck(body, options, head, mediaQueries, style);
 }

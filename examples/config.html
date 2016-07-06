@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Oracle - JavaScript Media Queries: Config example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #222;
+    }
+    
+    h1 {
+        color: #F57E76;
+        width: 100%;
+        text-align: center;
+    }
+    
+    h5 {
+        color: #C563F2;
+        width: 100%;
+        text-align: center;
+        font-family: Sans-Serif;
+        padding: 0;
+        margin: 0;
+    }
+    
+    h3 {
+        color: #76F5B5;
+        width: 100%;
+        text-align: center;
+        font-family: Sans-Serif;
+    }
+    
+    section {
+        width: 100%;
+    }
+    
+    div {
+        font-family: Sans-Serif;
+        width: 100vw;
+        position: relative;
+        float: left;
+        border-radius: 16px;
+        margin: 0.2em 0;
+        padding: 0.2em 0 0.2em 0.5em;
+        -webkit-transition: background-color 0.5s;
+        -moz-transition: background-color 0.5s;
+        -o-transition: background-color 0.5s;
+        transition: background-color 0.5s;
+    }
+    
+    div span {
+        border-radius: 8px;
+        background-color: #90D4AC;
+        position: relative;
+        float: left;
+        clear: both;
+        padding: 0.2em 0.5em;
+        margin: 0.2em 0.5em;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+    }
+    </style>
+</head>
+
+<body>
+    <h1>Oracle</h1>
+    <h5>CONFIG</h5>
+    <h3>Resize the window</h3>
+    <section>
+        <div><span>@media only screen and (max-width: 40em) </span><span> </span></div>
+        <div><span>@media only screen and (min-width: 40.063em) and (max-width: 64em) </span><span>_</span></div>
+        <div><span>@media only screen and (min-width: 64.063em) and (max-width: 90em) </span><span>_</span></div>
+        <div><span>@media only screen and (min-width: 90.063em) and (max-width: 120em) </span><span>_</span></div>
+        <div><span>@media only screen and (min-width: 120.063em) </span><span>_</span></div>
+    </section>
+    <script src="../oracle.js"></script>
+    <script>
+    var colors = ['#FF795E', '#FF945E', '#FFAF5E', '#FFC95E', '#FFFF5E'];
+    var divs = [].slice.call(document.getElementsByTagName('div'));
+
+
+    function updateTruthy(div) {
+        div.children[1].innerHTML = 'TRUTHY';
+        div.children[1].style.backgroundColor = 'yellowgreen';
+    }
+
+
+    function updateFalsy(div) {
+        div.children[1].innerHTML = 'FALSY';
+        div.children[1].style.backgroundColor = 'red';
+    }
+
+
+    divs.forEach(function(div, i) {
+        div.style.backgroundColor = colors[i];
+    })
+
+
+    oracle(
+        [{
+            media: '@media only screen and (max-width: 40em)',
+            truthy: function() {
+                updateTruthy(divs[0]);
+            },
+            falsy: function() {
+                updateFalsy(divs[0]);
+            },
+        }, {
+            media: '@media only screen and (min-width: 40.063em) and (max-width: 64em)',
+            truthy: function() {
+                updateTruthy(divs[1]);
+            },
+            falsy: function() {
+                updateFalsy(divs[1]);
+            },
+        }, {
+            media: '@media only screen and (min-width: 64.063em) and (max-width: 90em)',
+            truthy: function() {
+                updateTruthy(divs[2]);
+            },
+            falsy: function() {
+                updateFalsy(divs[2]);
+            },
+        }, {
+            media: '@media only screen and (min-width: 90.063em) and (max-width: 120em)',
+            truthy: function() {
+                updateTruthy(divs[3]);
+            },
+            falsy: function() {
+                updateFalsy(divs[3]);
+            },
+        }, {
+            media: '@media only screen and (min-width: 120.063em)',
+            truthy: function() {
+                updateTruthy(divs[4]);
+            },
+            falsy: function() {
+                updateFalsy(divs[4]);
+            },
+        }],
+        {
+            debounce: 400
+        }
+    );
+    </script>
+</body>
+
+</html>
