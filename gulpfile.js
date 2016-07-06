@@ -26,8 +26,19 @@ var watch = [
  * src files in order.
  */
 var src = [
+    // Wrapper start.
     './src/amd-wrapper-start.js',
+
+    // CustomEvents polyfill.
+    './libs/custom-events.js',
+
+    // Resizilla for window resize debouncing.
+    './libs/resizilla.js',
+
+    // Oracle.
     './src/oracle.src.js',
+    
+    // Wrapper end.
     './src/amd-wrapper-end.js'
 ];
 
