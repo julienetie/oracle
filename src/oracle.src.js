@@ -33,11 +33,11 @@ is.indexOf = function(str, substr) {
 }
 
 
-function triggerEventOrCallback(trigger) {
-    if (is.string(trigger)) {
+function triggerEventOrCallback(eventTarget, trigger) {console.log(eventTarget)
+    if (is.string(trigger)) { 
         // Needs to migrate for optimization
         var event = new CustomEvent(trigger, {});
-        document.dispatchEvent(event);
+        eventTarget.dispatchEvent(event);
     } else {
         trigger();
     }
@@ -45,15 +45,16 @@ function triggerEventOrCallback(trigger) {
 
 
 function detectChanges(config, fortunes, mediaQueries) {
+    var eventTarget = config.eventTarget || document;
     var trig = function() {
         fortunes.forEach(function(fortune, i) {
             if (is.fortuneTruthy(fortune, i)) {
                 if (mediaQueries[i].hasOwnProperty('truthy')) {
-                    triggerEventOrCallback(mediaQueries[i].truthy);
+                    triggerEventOrCallback(eventTarget , mediaQueries[i].truthy);
                 }
             } else {
                 if (mediaQueries[i].hasOwnProperty('falsy')) {
-                    triggerEventOrCallback(mediaQueries[i].falsy);
+                    triggerEventOrCallback(eventTarget, mediaQueries[i].falsy);
                 }
             }
         })
