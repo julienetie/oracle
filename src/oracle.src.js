@@ -1,12 +1,16 @@
 // Event listener polyfill
-!window.addEventListener && (function (WindowPrototype, DocumentPrototype, ElementPrototype, addEventListener, removeEventListener, dispatchEvent, registry) {
-    WindowPrototype[addEventListener] = DocumentPrototype[addEventListener] = ElementPrototype[addEventListener] = function (type, listener) {
+!window.addEventListener && (function(WindowPrototype, DocumentPrototype, ElementPrototype, addEventListener, removeEventListener, dispatchEvent, registry) {
+    WindowPrototype[addEventListener] = DocumentPrototype[addEventListener] = ElementPrototype[addEventListener] = function(type, listener) {
         var target = this;
 
-        registry.unshift([target, type, listener, function (event) {
+        registry.unshift([target, type, listener, function(event) {
             event.currentTarget = target;
-            event.preventDefault = function () { event.returnValue = false };
-            event.stopPropagation = function () { event.cancelBubble = true };
+            event.preventDefault = function() {
+                event.returnValue = false
+            };
+            event.stopPropagation = function() {
+                event.cancelBubble = true
+            };
             event.target = event.srcElement || target;
 
             listener.call(target, event);
@@ -15,7 +19,7 @@
         this.attachEvent("on" + type, registry[0][3]);
     };
 
-    WindowPrototype[removeEventListener] = DocumentPrototype[removeEventListener] = ElementPrototype[removeEventListener] = function (type, listener) {
+    WindowPrototype[removeEventListener] = DocumentPrototype[removeEventListener] = ElementPrototype[removeEventListener] = function(type, listener) {
         for (var index = 0, register; register = registry[index]; ++index) {
             if (register[0] == this && register[1] == type && register[2] == listener) {
                 return this.detachEvent("on" + type, registry.splice(index, 1)[0][3]);
@@ -23,7 +27,7 @@
         }
     };
 
-    WindowPrototype[dispatchEvent] = DocumentPrototype[dispatchEvent] = ElementPrototype[dispatchEvent] = function (eventObject) {
+    WindowPrototype[dispatchEvent] = DocumentPrototype[dispatchEvent] = ElementPrototype[dispatchEvent] = function(eventObject) {
         return this.fireEvent("on" + eventObject.type, eventObject);
     };
 })(Window.prototype, HTMLDocument.prototype, Element.prototype, "addEventListener", "removeEventListener", "dispatchEvent", []);
@@ -205,7 +209,7 @@ function triggerEventOrCallback(trigger) {
     if (is.string(trigger)) {
         // Needs to migrate for optimization
         var event = new CustomEvent(trigger, {});
-            document.dispatchEvent(event);
+        document.dispatchEvent(event);
     } else {
         trigger();
     }
@@ -237,7 +241,13 @@ function createMediaQueryDetector(body, head, i, mediaQuery, mediaQueries, style
     fortune.id = '⌘' + i;
     fortune.style.zIndex = -1000;
     body.appendChild(fortune);
-    style.innerHTML += '\n' + mediaQuery.media + statement;
+
+    if (style.styleSheet) {
+        style.styleSheet.cssText += '\n' + mediaQuery.media + statement;
+    } else {
+        style.textContent += '\n' + mediaQuery.media + statement;
+    }
+
     fortunes.push(fortune);
 
     if (i === mediaQueries.length - 1) {
@@ -259,7 +269,7 @@ function oracle(mediaQuery, truthy, falsy) {
     var mediaQueries;
 
     // Create style element and append to the head
-    var style = document.createElement('style');
+    var style = document.createElementNS(document.documentElement.namespaceURI, "style");
 
     head.appendChild(style);
 
