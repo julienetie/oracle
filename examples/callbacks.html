@@ -105,7 +105,7 @@
 
     oracle(
         [{
-            media: '@media only screen and (max-width: 640px)',
+            media: '@media only screen and (max-width: 40em)',
             truthy: function() {
                 updateTruthy(divs[0]);
             },
@@ -113,7 +113,7 @@
                 updateFalsy(divs[0]);
             },
         }, {
-            media: '@media only screen and (min-width: 641px) and (max-width: 1024px)',
+            media: '@media only screen and (min-width: 40.063em) and (max-width: 64em)',
             truthy: function() {
                 updateTruthy(divs[1]);
             },
@@ -121,7 +121,7 @@
                 updateFalsy(divs[1]);
             },
         }, {
-            media: '@media only screen and (min-width: 1025px) and (max-width: 1440px)',
+            media: '@media only screen and (min-width: 64.063em) and (max-width: 90em)',
             truthy: function() {
                 updateTruthy(divs[2]);
             },
@@ -129,7 +129,7 @@
                 updateFalsy(divs[2]);
             },
         }, {
-            media: '@media only screen and (min-width: 1441px) and (max-width: 1920px)',
+            media: '@media only screen and (min-width: 90.063em) and (max-width: 120em)',
             truthy: function() {
                 updateTruthy(divs[3]);
             },
@@ -137,7 +137,7 @@
                 updateFalsy(divs[3]);
             },
         }, {
-            media: '@media only screen and (min-width: 1921px)',
+            media: '@media only screen and (min-width: 120.063em)',
             truthy: function() {
                 updateTruthy(divs[4]);
             },

@@ -25,6 +25,11 @@ is.fortuneTruthy = function(value, i) {
     return window.getComputedStyle(value, null).getPropertyValue('width') === (i + 1) + 'px';
 }
 
+is.indexOf = function(str, substr) {
+    return str.indexOf(substr) >= 0;
+}
+
+
 function triggerEventOrCallback(trigger) {
     if (is.string(trigger)) {
         // Needs to migrate for optimization
@@ -37,7 +42,7 @@ function triggerEventOrCallback(trigger) {
 
 
 function detectChanges(fortunes, mediaQueries) {
-var trig = function() {
+    var trig = function() {
         fortunes.forEach(function(fortune, i) {
             if (is.fortuneTruthy(fortune, i)) {
                 if (mediaQueries[i].hasOwnProperty('truthy')) {
@@ -49,7 +54,7 @@ var trig = function() {
                 }
             }
         })
-    } 
+    }
 
     trig();
     resizilla(trig, 200, true);
@@ -65,11 +70,24 @@ function createMediaQueryDetector(body, head, i, mediaQuery, mediaQueries, style
     fortune.id = '⌘' + i;
     fortune.style.zIndex = -1000;
     body.appendChild(fortune);
+    var regex = /[+-]?\d+(\.\d+)?/g;
+    var nonNumeric = /[^\d.]/g;
+    var mediaQueryValue;
+
+    if (is.indexOf(mediaQuery.media, 'em')) {
+        mediaQueryValue = mediaQuery.media.split('and').map(function(queryComponent) {
+            var originalNumber = queryComponent.replace(nonNumeric, '');
+            var newNumber = Math.floor(originalNumber * 16);
+            return queryComponent.replace(originalNumber + 'em', newNumber + 'px');
+        }).join('and');
+    } else {
+        mediaQueryValue = mediaQuery.media;
+    }
 
     if (style.styleSheet) {
-        style.styleSheet.cssText += '\n' + mediaQuery.media + statement;
+        style.styleSheet.cssText += '\n' + mediaQueryValue + statement;
     } else {
-        style.textContent += '\n' + mediaQuery.media + statement;
+        style.textContent += '\n' + mediaQueryValue + statement;
     }
 
     fortunes.push(fortune);
