@@ -1,5 +1,6 @@
 /**
- * Oracle fasade for triggering events and callbacks on media query changes.
+ * Oracle fasade for triggering events and callbacks 
+ * on media query changes.
  * @type {Object}
  */
 var is = {};
