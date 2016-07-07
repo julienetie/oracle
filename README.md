@@ -1,5 +1,6 @@
+####Oracle 
 
-##Oracle detects CSS media queries in JavaScript.
+#Responsive CSS Media Queries for JavaScript 
 
 [![Build Status](https://travis-ci.org/julienetie/oracle.svg?branch=master)](https://travis-ci.org/julienetie/oracle)
 
