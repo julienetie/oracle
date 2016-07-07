@@ -1,6 +1,8 @@
 var gulp = require('gulp');
+var jshint = require('gulp-jshint');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
+var notify = require('gulp-notify');
 var plumber = require('gulp-plumber');
 var watch = require('gulp-watch');
 
@@ -61,9 +63,12 @@ var srcNoLibs = src.filter(removeLibs);
  */
 gulp.task('Build ./oracle.js', function() {
     gulp.src(src)
-        .pipe(plumber())
+      .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
+        .pipe(jshint())
+        .pipe(jshint.reporter('jshint-stylish'))
         .pipe(concat('oracle.js'))
-        .pipe(gulp.dest('./'));
+        .pipe(gulp.dest('./'))
+        .pipe(notify({ message: '<%= file.relative %> built', onLast: true }));
 });
 
 
@@ -72,10 +77,10 @@ gulp.task('Build ./oracle.js', function() {
  */
 gulp.task('Build ./oracle.min.js', function() {
     gulp.src(src)
-        .pipe(plumber())
         .pipe(concat('oracle.min.js'))
         .pipe(uglify())
-        .pipe(gulp.dest('./'));
+        .pipe(gulp.dest('./'))
+        .pipe(notify({ message: '<%= file.relative %> built', onLast: true }));
 });
 
 
@@ -84,9 +89,9 @@ gulp.task('Build ./oracle.min.js', function() {
  */
 gulp.task('Build ./oracle.no-libs.js', function() {
     gulp.src(srcNoLibs)
-        .pipe(plumber())
         .pipe(concat('oracle.no-libs.js'))
-        .pipe(gulp.dest('./'));
+        .pipe(gulp.dest('./'))
+        .pipe(notify({ message: '<%= file.relative %> built', onLast: true }));
 });
 
 
@@ -95,10 +100,10 @@ gulp.task('Build ./oracle.no-libs.js', function() {
  */
 gulp.task('Build ./oracle.no-libs.min.js', function() {
     gulp.src(srcNoLibs)
-        .pipe(plumber())
         .pipe(concat('oracle.no-libs.min.js'))
         .pipe(uglify())
-        .pipe(gulp.dest('./'));
+        .pipe(gulp.dest('./'))
+        .pipe(notify({ message: '<%= file.relative %> built', onLast: true }));
 });
 
 

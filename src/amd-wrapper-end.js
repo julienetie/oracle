@@ -1,3 +1,4 @@
+/* jshint ignore:start */
 // Node.js/ CommonJS
 if (typeof module === 'object' && typeof module.exports === 'object') {
     module.exports = exports = oracle;

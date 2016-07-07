@@ -1,4 +1,6 @@
+/* jshint ignore:start */
 (function (window) {
+/* jshint ignore:end */
 
 /*           _.-~-.
            7''  Q..\
@@ -332,30 +334,30 @@ var fortunes = [];
 
 is.string = function(value) {
     return typeof value === 'string';
-}
+};
 
 
 is.stringOrFunction = function(value) {
     return typeof value === 'string' || value === 'function';
-}
+};
 
 
 is.anArrayContainingObject = function(value) {
     return value.constructor === Array && value[0].constructor === {}.constructor;
-}
+};
 
 
 is.fortuneTruthy = function(value, i) {
     return window.getComputedStyle(value, null).getPropertyValue('width') === (i + 1) + 'px';
-}
+};
 
 
 is.indexOf = function(str, substr) {
     return str.indexOf(substr) >= 0;
-}
+};
 
 
-function triggerEventOrCallback(eventTarget, trigger) {console.log(eventTarget)
+function triggerEventOrCallback(eventTarget, trigger) {
     if (is.string(trigger)) { 
         // Needs to migrate for optimization
         var event = new CustomEvent(trigger, {});
@@ -379,8 +381,8 @@ function detectChanges(config, fortunes, mediaQueries) {
                     triggerEventOrCallback(eventTarget, mediaQueries[i].falsy);
                 }
             }
-        })
-    }
+        });
+    };
     var incept = config.incept === undefined ? true : config.incept;
     trig();
     resizilla(trig, (config.debounce || 200), incept);
@@ -445,7 +447,7 @@ function oracle(mediaQuery, truthy, falsy, config) {
         var singleOptions = {
             media: mediaQuery,
             truthy: truthy
-        }
+        };
 
         if (is.stringOrFunction(falsy)) {
             singleOptions.falsy = falsy;
@@ -474,6 +476,7 @@ function oracle(mediaQuery, truthy, falsy, config) {
     setupMediaQueriesCheck(body, options, head, mediaQueries, style);
 }
 
+/* jshint ignore:start */
 // Node.js/ CommonJS
 if (typeof module === 'object' && typeof module.exports === 'object') {
     module.exports = exports = oracle;
