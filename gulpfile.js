@@ -108,7 +108,14 @@ gulp.task('Build ./oracle.no-libs.min.js', function() {
 
 
 /**
- * Builds once and watch for changes.
+ * Builds once.
  */
 gulp.task('default', tasks)
-    .watch(watch, tasks);
+
+
+/**
+ * Watch for changes.
+ */
+gulp.task('watch', function(){
+    gulp.watch(watch, tasks);
+});
