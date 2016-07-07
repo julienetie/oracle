@@ -3,5 +3,9 @@ node_js:
     - "5.11.1"
 before_script:
     - npm install --save-dev gulp
+    - npm install --save-dev jshint
+    - npm install --save-dev gulp-jshint
+    - npm install --save-dev gulp-notify
+    - npm install --save-dev jshint-stylish
     - npm install -g gulp
 script: gulp
