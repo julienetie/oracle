@@ -2,5 +2,6 @@ language: node.js
 node_js:
     - "5.11.1"
 before_script:
+    - npm install --save-dev gulp
     - npm install -g gulp
 script: gulp
