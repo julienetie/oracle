@@ -15,5 +15,6 @@ before_script:
     - npm install --save-dev gulp-uglify
     - npm install --save-dev gulp-jshint
     - npm install --save-dev gulp-notify
+    - npm install --save-dev gulp-watch
 
 script: gulp
