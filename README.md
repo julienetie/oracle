@@ -1,4 +1,7 @@
+
 ##Oracle detects CSS media queries in JavaScript.
+
+[![Build Status](https://travis-ci.org/julienetie/oracle.svg?branch=master)](https://travis-ci.org/julienetie/oracle)
 
 (Working alpha API, tested in the latest Chrome only)
 
