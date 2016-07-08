@@ -1,15 +1,19 @@
 language: node.js
 
+sudo: false
+
+cache:
+  directories:
+    - node_modules
+
 node_js:
     - "5.11.1"
 
 before_script:
     - npm install -g gulp
-
     - npm install --save-dev gulp
     - npm install --save-dev jshint
     - npm install --save-dev jshint-stylish
-
     - npm install --save-dev gulp-concat
     - npm install --save-dev gulp-plumber
     - npm install --save-dev gulp-uglify
