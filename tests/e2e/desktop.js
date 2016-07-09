@@ -1,30 +1,35 @@
-var webdriverio = require('webdriverio'),
-  assert = require('assert');
+'use strict';
+
+let webdriverio = require('webdriverio');
+let callbackURL = 'http://localhost:8000/examples/callbacks.html';
+let chai = require('chai');
+var expect = chai.expect;
+var client;
+
+
+before(() => {
+  client = webdriverio.remote({
+    desiredCapabilities: {
+      browserName: 'chrome'
+    }
+  });
+  return client.init();
+});
+
+
+after(() => {
+  return client.end();
+});
+
 
 describe('my webdriverio tests', function() {
-
   this.timeout(99999999);
-  var client;
-
-  before(function() {
-    client = webdriverio.remote({
-      desiredCapabilities: {
-        browserName: 'chrome'
-      }
-    });
-    return client.init();
-  });
-
-  it('Github test', function() {
+  it('Should match title', function() {
     return client
-      .url('https://github.com/')
-      .getTitle().then(function(title) {
-        console.log(title)
-        assert(title === 'How people build software · GitHub');
+      .url(callbackURL)
+      .getTitle().then((title) => {
+        console.log(title);
+        expect(title).to.equal('Oracle - JavaScript Media Queries: Callback example');
       });
-  });
-
-  after(function() {
-    return client.end();
   });
 });
