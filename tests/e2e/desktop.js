@@ -1,17 +1,18 @@
-var webdriverio = require('webdriverio');
-var options = { desiredCapabilities: { browserName: 'chrome' } };
-var client = webdriverio.remote(options);
+var assert = require('assert');
 
-client
-   .init()
-   .url('http://localhost:8000/examples/callbacks.html')
-   // .setValue('#search_form_input_homepage', 'WebdriverIO')
+describe('read page title of http://webdriver.io', () => {
+    it('webdriver.io has the expected page title', function * () {
+        return browser
+            .url('http://webdriver.io')
+            .getTitle().then((title) => {
+                assert.equal(title, 'WebdriverIO - Selenium 2.0 javascript bindings for nodejs');
+            });
+    });
 
-   .getTitle().then(function(title) {
-       console.log('Title is: ' + title);
-       
-   }).then(fuction(){
-      this.timeout(10000).end();
-   })
-   
-// 
+    it('should be possible to reach the Developer Guide via a click', function * () {
+        yield browser.click('a[href="/guide.html"');
+
+        var devGuideTitle = yield browser.getTitle();
+        assert.equal(devGuideTitle, 'WebdriverIO - Developer Guide');
+    });
+});
