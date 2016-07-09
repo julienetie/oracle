@@ -1,18 +1,30 @@
-var assert = require('assert');
+var webdriverio = require('webdriverio'),
+  assert = require('assert');
 
-describe('read page title of http://webdriver.io', () => {
-    it('webdriver.io has the expected page title', function * () {
-        return browser
-            .url('http://webdriver.io')
-            .getTitle().then((title) => {
-                assert.equal(title, 'WebdriverIO - Selenium 2.0 javascript bindings for nodejs');
-            });
+describe('my webdriverio tests', function() {
+
+  this.timeout(99999999);
+  var client;
+
+  before(function() {
+    client = webdriverio.remote({
+      desiredCapabilities: {
+        browserName: 'chrome'
+      }
     });
+    return client.init();
+  });
 
-    it('should be possible to reach the Developer Guide via a click', function * () {
-        yield browser.click('a[href="/guide.html"');
+  it('Github test', function() {
+    return client
+      .url('https://github.com/')
+      .getTitle().then(function(title) {
+        console.log(title)
+        assert(title === 'How people build software · GitHub');
+      });
+  });
 
-        var devGuideTitle = yield browser.getTitle();
-        assert.equal(devGuideTitle, 'WebdriverIO - Developer Guide');
-    });
+  after(function() {
+    return client.end();
+  });
 });
