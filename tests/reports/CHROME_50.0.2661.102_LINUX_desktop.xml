@@ -5,9 +5,39 @@
 
   <testsuite name="desktop"
     errors="0" failures="0" hostname="" id="" package="desktop" skipped="0"
-    tests="1" time="6.362" timestamp="Sun, 10 Jul 2016 20:55:12 GMT">
+    tests="1" time="7.206" timestamp="Sun, 10 Jul 2016 21:06:01 GMT">
   
-    <testcase name="Oracle - JavaScript Media Queries: Callback example" time="6.362" assertions="21">
+    <testcase name="Oracle - JavaScript Media Queries: Callback example" time="7.206" assertions="36">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 
     
 

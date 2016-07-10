@@ -115,55 +115,56 @@ module.exports = {
 
 
         /**
-         * Min width 1025px --> Max Width 1440px.
+         * Min width 1441px --> Max Width 1920px.
          */
-        // .perform(function(client, done) {
-        //         testTitle('@media only screen and (min-width: 64.063em) and (max-width: 90em)');
-        //         done();
-        //     })
-        //     .execute(getViewportSize, [], function(result) {
-        //         client.resizeWindow(1025 + result.value, windowHeight);
-        //         return client;
-        //     })
-        //     .perform(function(client, done) {
-        //             testTitle('min-width: 64.063em');
-        //             done();
-        //         })
-        //     .perform(function(client, done) {
-        //         results.mobile.text.to.contain('FALSY');
-        //         results.tablet.text.to.contain('FALSY');
-        //         results.desktopSmall.text.to.contain('TRUTHY');
-        //         results.desktopMedium.text.to.contain('FALSY');
-        //         results.desktopLarge.text.to.contain('FALSY');
-        //         done();
-        //     }).pause(2000)
-        //     .execute(getViewportSize, [], function(result) {
-        //         client.resizeWindow(1440 + result.value, windowHeight);
-        //         return client;
-        //     }).pause(2000)
-        //     .perform(function(client, done) {
-        //             testTitle('max-width: 90em');
-        //             done();
-        //         })
-        //     .pause(2000)
-        //     .perform(function(client, done) {
-        //         results.mobile.text.to.contain('FALSY');
-        //         results.tablet.text.to.contain('FALSY');
-        //         results.desktopSmall.text.to.contain('TRUTHY');
-        //         results.desktopMedium.text.to.contain('FALSY');
-        //         results.desktopLarge.text.to.contain('FALSY');
-        //         done();
-        //     })
+        .perform(function(client, done) {
+                testTitle('@media only screen and (min-width: 90.063em) and (max-width: 120em)');
+                done();
+            })
+            .execute(getViewportSize, [], function(result) {
+                client.resizeWindow(1441 + result.value, windowHeight);
+                return client;
+            })
+            .perform(function(client, done) {
+                results.mobile.text.to.contain('FALSY');
+                results.tablet.text.to.contain('FALSY');
+                results.desktopSmall.text.to.contain('FALSY');
+                results.desktopMedium.text.to.contain('TRUTHY');
+                results.desktopLarge.text.to.contain('FALSY');
+                done();
+            })
+            .execute(getViewportSize, [], function(result) {
+                client.resizeWindow(1920 + result.value, windowHeight);
+                return client;
+            })
+            .perform(function(client, done) {
+                results.mobile.text.to.contain('FALSY');
+                results.tablet.text.to.contain('FALSY');
+                results.desktopSmall.text.to.contain('FALSY');
+                results.desktopMedium.text.to.contain('TRUTHY');
+                results.desktopLarge.text.to.contain('FALSY');
+                done();
+            })
 
+
+        /**
+         * Min width 1921px.
+         */
+        .perform(function(client, done) {
+                testTitle('@media only screen and (min-width: 120.063em)');
+                done();
+            })
+            .execute(getViewportSize, [], function(result) {
+                client.resizeWindow(1921 + result.value, windowHeight);
+                return client;
+            })
+            .perform(function(client, done) {
+                results.mobile.text.to.contain('FALSY');
+                results.tablet.text.to.contain('FALSY');
+                results.desktopSmall.text.to.contain('FALSY');
+                results.desktopMedium.text.to.contain('FALSY');
+                results.desktopLarge.text.to.contain('TRUTHY');
+                done();
+            })
     }
 }
-
-
-
-
-// this.ResizeWindow = (client) => {
-//     client
-//         .resizeWindow(800, 600)
-//         .pause(2000)
-//         .end();
-// }
