@@ -1,13 +1,14 @@
 'use strict';
 
 var windowHeight = 500;
+var delay = 300;
 
 function testTitle(value) {
     console.log('\n\n▀▄▀▄ ' + value.toUpperCase() + ' ▀▄▀▄\n\n');
 }
 
 function getViewportSize() {
-    return window.outerWidth - window.innerWidth;//document.documentElement.clientWidth;
+    return window.outerWidth - window.innerWidth;
 }
 
 var results = {}
@@ -22,10 +23,10 @@ module.exports = {
          */
         client
             .url('http://localhost:8000/examples/callbacks.html')
-            .pause(1000)
+            .pause(delay)
             .assert.title('Oracle - JavaScript Media Queries: Callback example')
             .resizeWindow(0, 500)
-
+            .pause(delay)
 
         /**
          * Width 640px.
@@ -38,6 +39,7 @@ module.exports = {
                 client.resizeWindow(640 + result.value, windowHeight);
                 return client;
             })
+            .pause(delay)
             .perform(function(client, done) {
                 results.mobile = client.expect.element('section div:nth-child(1) span:nth-child(2)').text.to.contain('TRUTHY');
                 results.tablet = client.expect.element('section div:nth-child(2) span:nth-child(2)').text.to.contain('FALSY');
@@ -46,6 +48,7 @@ module.exports = {
                 results.desktopLarge = client.expect.element('section div:nth-child(5) span:nth-child(2)').text.to.contain('FALSY');
                 done();
             })
+            .pause(delay)
 
 
         /**
@@ -59,6 +62,7 @@ module.exports = {
                 client.resizeWindow(641 + result.value, windowHeight);
                 return client;
             })
+            .pause(delay)
             .perform(function(client, done) {
                 results.mobile.text.to.contain('FALSY');
                 results.tablet.text.to.contain('TRUTHY');
@@ -71,6 +75,7 @@ module.exports = {
                 client.resizeWindow(1024 + result.value, windowHeight);
                 return client;
             })
+        .pause(delay)
             .perform(function(client, done) {
                 results.mobile.text.to.contain('FALSY');
                 results.tablet.text.to.contain('TRUTHY');
@@ -79,6 +84,7 @@ module.exports = {
                 results.desktopLarge.text.to.contain('FALSY');
                 done();
             })
+            .pause(delay)
 
 
         /**
@@ -92,6 +98,7 @@ module.exports = {
                 client.resizeWindow(1025 + result.value, windowHeight);
                 return client;
             })
+        .pause(delay)
             .perform(function(client, done) {
                 results.mobile.text.to.contain('FALSY');
                 results.tablet.text.to.contain('FALSY');
@@ -100,6 +107,7 @@ module.exports = {
                 results.desktopLarge.text.to.contain('FALSY');
                 done();
             })
+        .pause(delay)
             .execute(getViewportSize, [], function(result) {
                 client.resizeWindow(1440 + result.value, windowHeight);
                 return client;
@@ -112,6 +120,7 @@ module.exports = {
                 results.desktopLarge.text.to.contain('FALSY');
                 done();
             })
+        .pause(delay)
 
 
         /**
@@ -125,6 +134,7 @@ module.exports = {
                 client.resizeWindow(1441 + result.value, windowHeight);
                 return client;
             })
+        .pause(delay)
             .perform(function(client, done) {
                 results.mobile.text.to.contain('FALSY');
                 results.tablet.text.to.contain('FALSY');
@@ -137,6 +147,7 @@ module.exports = {
                 client.resizeWindow(1920 + result.value, windowHeight);
                 return client;
             })
+            .pause(delay)
             .perform(function(client, done) {
                 results.mobile.text.to.contain('FALSY');
                 results.tablet.text.to.contain('FALSY');
@@ -145,7 +156,7 @@ module.exports = {
                 results.desktopLarge.text.to.contain('FALSY');
                 done();
             })
-
+            .pause(delay)
 
         /**
          * Min width 1921px.
@@ -158,6 +169,7 @@ module.exports = {
                 client.resizeWindow(1921 + result.value, windowHeight);
                 return client;
             })
+            .pause(delay)
             .perform(function(client, done) {
                 results.mobile.text.to.contain('FALSY');
                 results.tablet.text.to.contain('FALSY');
@@ -166,5 +178,6 @@ module.exports = {
                 results.desktopLarge.text.to.contain('TRUTHY');
                 done();
             })
+            .pause(delay)
     }
 }
