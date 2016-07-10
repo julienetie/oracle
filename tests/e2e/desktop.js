@@ -1,35 +1,10 @@
 'use strict';
 
-let webdriverio = require('webdriverio');
-let callbackURL = 'http://localhost:8000/examples/callbacks.html';
-let chai = require('chai');
-var expect = chai.expect;
-var client;
-
-
-before(() => {
-  client = webdriverio.remote({
-    desiredCapabilities: {
-      browserName: 'chrome'
-    }
-  });
-  return client.init();
-});
-
-
-after(() => {
-  return client.end();
-});
-
-
-describe('my webdriverio tests', function() {
-  this.timeout(99999999);
-  it('Should match title', function() {
-    return client
-      .url(callbackURL)
-      .getTitle().then((title) => {
-        console.log(title);
-        expect(title).to.equal('Oracle - JavaScript Media Queries: Callback example');
-      });
-  });
-});
+this.ContentsTest = (browser) => {
+    browser
+      .url('http://localhost:8000/callbacks.html')
+      .pause(1000)
+      .assert.title('Oracle - JavaScript Media Queries: Callback example')
+      // .assert.containsText('#content', 'Hello, Nightwatch.js!')
+      .end();
+}
