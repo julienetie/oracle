@@ -9,7 +9,7 @@ gulp.task('serve:test', function (callback) {
     notify: false,
     port: 8000,
     open: false,
-    server: { baseDir: ['examples'] },
+    server: { baseDir: ['./'] },
     snippetOptions: { blacklist: ['/'] },
     ui: false
   }, function() {
