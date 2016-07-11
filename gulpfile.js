@@ -154,6 +154,11 @@ gulp.task('default', tasks);
 
 
 /**
+ * Create oracle builds.
+ */
+gulp.task('build', tasks);
+
+/**
  * Watch for changes.
  */
 gulp.task('watch', function(){

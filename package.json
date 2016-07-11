@@ -26,7 +26,8 @@
   "scripts": {
     "test": "gulp test",
     "test_single": "./node_modules/.bin/nightwatch -e osx_chrome_50",
-    "test_parallel": "./node_modules/.bin/nightwatch -e default,firefox_45,chrome_48"
+    "test_parallel": "./node_modules/.bin/nightwatch -e default,firefox_45,chrome_48",
+    "build": "gulp build"
   },
   "repository": {
     "type": "git",
