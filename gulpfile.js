@@ -7,7 +7,7 @@ var uglify = require('gulp-uglify');
 var notify = require('gulp-notify');
 var plumber = require('gulp-plumber');
 var watch = require('gulp-watch');
-var browserSync = require('browser-sync');
+var browsersync = require('browser-sync');
 var mocha = require('gulp-mocha');
 var nightwatch = require('nightwatch');
 

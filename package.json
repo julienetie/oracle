@@ -3,14 +3,14 @@
   "version": "0.0.1",
   "description": "JavaScript Media Queries",
   "main": "oracle.js",
-   "engines": {
+  "engines": {
     "node": ">=0.10.0"
   },
   "dependencies": {},
   "devDependencies": {
     "browser-sync": "^2.13.0",
-    "chai": "^3.5.0",
     "chromedriver": "^2.21.2",
+    "dotenv": "^2.0.0",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
     "gulp-jshint": "^2.0.1",
@@ -20,12 +20,13 @@
     "gulp-uglify": "^1.5.4",
     "jshint": "^2.9.2",
     "jshint-stylish": "^2.2.0",
-    "mocha": "^2.5.3",
     "nightwatch": "^0.9.5",
     "selenium-server-standalone-jar": "^2.53.0"
   },
   "scripts": {
-    "test": "gulp test"
+    "test": "gulp test",
+    "test_single": "./node_modules/.bin/nightwatch -e osx_chrome_50",
+    "test_parallel": "./node_modules/.bin/nightwatch -e default,firefox_45,chrome_48"
   },
   "repository": {
     "type": "git",

@@ -1,7 +1,7 @@
 'use strict';
 
 var windowHeight = 500;
-var delay = 300;
+var delay = 1000;
 
 function testTitle(value) {
     console.log('\n\n▀▄▀▄ ' + value.toUpperCase() + ' ▀▄▀▄\n\n');
@@ -22,11 +22,11 @@ module.exports = {
          * Oracle Callbacks page.
          */
         client
-            .url('http://localhost:8000/examples/callbacks.html')
+            // .url('http://localhost:8000/examples/callbacks.html')
+            .url('http://julienetienne.co.uk/oracle/examples/callbacks.html')
             .pause(delay)
             .assert.title('Oracle - JavaScript Media Queries: Callback example')
             .resizeWindow(0, 500)
-            .pause(delay)
 
         /**
          * Width 640px.

@@ -24,4 +24,10 @@ before_script:
     - npm install --save-dev jshint-stylish
     - npm install --save-dev nightwatch
 
-script: gulp
+    - npm install --save-dev chromedriver
+    - npm install --save-dev dotenv
+    - npm install --save-dev selenium-server-standalone-jar
+
+script: 
+#    - gulp
+    - npm run test_single
