@@ -1,8 +1,6 @@
 ![img](http://i67.tinypic.com/18onc8.jpg)
 #Responsive CSS Media Queries for JavaScript 
 
-[![Build Status](https://travis-ci.org/julienetie/oracle.svg?branch=master)](https://travis-ci.org/julienetie/oracle)
-
 Oracle does not make use of the matchMedia() API but instead retrieves the computed value of a declaired media query via its 
 computed value as being truthy or falsy.
 
