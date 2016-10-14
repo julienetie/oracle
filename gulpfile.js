@@ -6,7 +6,7 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var notify = require('gulp-notify');
 var plumber = require('gulp-plumber');
-var watch = require('gulp-watch');
+//var watch = require('gulp-watch');
 var browsersync = require('browser-sync');
 var mocha = require('gulp-mocha');
 var nightwatch = require('nightwatch');
@@ -161,6 +161,6 @@ gulp.task('build', tasks);
 /**
  * Watch for changes.
  */
-gulp.task('watch', function(){
-    gulp.watch(watch, tasks);
-});
+//gulp.task('watch', function(){
+//    gulp.watch(watch, tasks);
+//});
